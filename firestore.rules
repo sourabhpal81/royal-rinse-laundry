@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Bookings Rules
+    match /bookings/{bookingId} {
+      allow create: if true;
+      allow read: if true; // Let clients query records to track their orders by phone
+      allow update, delete: if false; // Restrict modifications to admin console
+    }
+    // Inquiries Rules
+    match /inquiries/{inquiryId} {
+      allow create: if true;
+      allow read: if true;
+      allow update, delete: if false;
+    }
+  }
+}
